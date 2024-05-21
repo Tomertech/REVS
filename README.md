@@ -1,2 +1,2 @@
-# NeuREVS
-NeuREVS: Unlearning Sensitive Information in LLMs
+# REVS
+REVS: Unlearning Sensitive Information in LLMs
