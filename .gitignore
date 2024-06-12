@@ -1,0 +1,6 @@
+notebooks/.*
+**/__pycache__/
+MEMIT/data/
+condaenv*
+notebooks/models*
+notebooks/wandb/
