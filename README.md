@@ -1,10 +1,10 @@
 # REVS: Unlearning Sensitive Information in LLMs
 
-Welcome to the REVS (Rank Editing in the Vocabulary Space) repository. REVS introduces a novel technique aimed at unlearning sensitive information from Large Language Models (LLMs) while minimally degrading their overall utility. This method, detailed in our [REVS Paper](https://tomertech.github.io/REVS-Web/), is at the forefront of ensuring privacy and security in the deployment of LLMs. Currently, we support EleutherAI's GPT-J 6B and Llama 3 8B models.
+Welcome to the REVS (Rank Editing in the Vocabulary Space) repository. REVS introduces a novel technique aimed at unlearning sensitive information from Large Language Models (LLMs) while minimally degrading their overall utility. This method, detailed in our [REVS Paper](https://technion-cs-nlp.github.io/REVS/), is at the forefront of ensuring privacy and security in the deployment of LLMs. Currently, we support EleutherAI's GPT-J 6B and Llama 3 8B models.
 
 Contributions, feedback, and discussions are highly encouraged. Should you face any challenges or wish to propose enhancements, please do not hesitate to open an issue.
 
-![REVS Main Method](https://tomertech.github.io/REVS-Web/static/images/Main%20Method%20Plot%20Wide%20tinypng.png "REVS Main Method Overview")
+![REVS Main Method](https://technion-cs-nlp.github.io/REVS/static/images/Main%20Method%20Plot%20Wide%20tinypng.png "REVS Main Method Overview")
 
 *Editing one neuron with REVS:* (1) The neuron is projected from hidden space to vocabulary logit space. (2) The logit is adjusted to demote the target token rank to a desired lower rank R. (3) The adjusted logits vector is projected back to hidden space, yielding the updated neuron value.
 
@@ -30,11 +30,9 @@ Additionally, the code for running the complete suite of experiments, including 
 
 ## How to Cite
 ```bibtex
-@article{tomer2024revs,
+@article{ashuach2024revs,
   title={REVS: Rank Editing in the Vocabulary Space for Unlearning Sensitive Information in Large Language Models},
   author={Ashuach, Tomer and Tutek, Martin and Belinkov, Yonatan},
-  journal={},
-  volume={},
   year={2024}
 }
 ```

@@ -95,7 +95,7 @@ def run_ft_exp(model, tokenizer, prompts, targets, config, specificity=False, ge
         res_dict['specificity'] = run_specificity(model, tokenizer, prompts['retain'], targets['retain'], config)
 
     if generality:
-        res_dict['generality'] = run_generality(model, tokenizer, prompts['retain'], targets['retain'], config)
+        res_dict['generality'] = run_generality(model, tokenizer, prompts['generality'], targets['generality'], config)
 
     if extraction:
         res_dict['delta_attack'] = run_delta_attack(model, tokenizer, prompts['unlearn'], targets['unlearn'], config)
