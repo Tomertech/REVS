@@ -1,6 +1,6 @@
 import argparse
 from utils.model import MemitConfig
-from utils.experiment import memit_multi_email_exp
+from utils.experiment_old import memit_multi_email_exp
 
 
 if __name__ == "__main__":

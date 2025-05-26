@@ -5,8 +5,8 @@ import torch
 from matplotlib.style import context
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.rome import repr_tools
-from MEMIT.util import nethook
+from baselines.MEMIT.rome import repr_tools
+from baselines.MEMIT.util import nethook
 
 from .rome_hparams import ROMEHyperParams
 

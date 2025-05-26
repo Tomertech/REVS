@@ -223,4 +223,4 @@ dependencies:
     - wandb==0.17.1
     - xxhash==3.4.1
     - yarl==1.9.4
-prefix: /home/tomerashuach/miniconda3/envs/revsenv
+prefix: miniconda3/envs/revsenv

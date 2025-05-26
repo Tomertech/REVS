@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Tuple
 import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from MEMIT.util import nethook
+from baselines.MEMIT.util import nethook
 
 from .ft_hparams import FTHyperParams
 

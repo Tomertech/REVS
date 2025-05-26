@@ -6,8 +6,8 @@ import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.util import nethook
-from MEMIT.util.generate import generate_fast
+from baselines.MEMIT.util import nethook
+from baselines.MEMIT.util.generate import generate_fast
 
 from .compute_u import compute_u
 from .compute_v import compute_v

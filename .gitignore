@@ -4,3 +4,4 @@ MEMIT/data/
 condaenv*
 notebooks/models*
 notebooks/wandb/
+baselines/MEMIT/data/

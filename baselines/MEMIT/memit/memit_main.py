@@ -8,10 +8,10 @@ import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.rome.layer_stats import layer_stats
-from MEMIT.util import nethook
-from MEMIT.util.generate import generate_fast
-from MEMIT.util.globals import *
+from baselines.MEMIT.rome.layer_stats import layer_stats
+from baselines.MEMIT.util import nethook
+from baselines.MEMIT.util.generate import generate_fast
+from baselines.MEMIT.util.globals import *
 
 from .compute_ks import compute_ks
 from .compute_z import compute_z, get_module_input_output_at_words, find_fact_lookup_idx

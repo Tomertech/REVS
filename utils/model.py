@@ -2,33 +2,33 @@ from typing import List, Tuple, Dict
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.util import nethook
-from MEMIT.baselines.ft import FTHyperParams, apply_ft_to_model
-from MEMIT.memit import MEMITHyperParams, apply_memit_to_model
-from MEMIT.rome import ROMEHyperParams, apply_rome_to_model
-from MEMIT.util.globals import *
+from baselines.MEMIT.util import nethook
+from baselines.MEMIT.baselines.ft import FTHyperParams, apply_ft_to_model
+from baselines.MEMIT.memit import MEMITHyperParams, apply_memit_to_model
+from baselines.MEMIT.rome import ROMEHyperParams, apply_rome_to_model
+from baselines.MEMIT.util.globals import *
 
 from utils.globals import CACHE_PATH, HG_TOKEN
 
 
 class FTConfig:
     def __init__(
-        self, 
-        score_threshold, 
-        skip_tokens, 
-        stop_tokens, 
-        max_tokens, 
-        lr, 
-        loss_break, 
-        norm_constraint, 
-        num_grad_steps, 
-        seed, 
-        perplexity, 
-        save_model, 
-        log_wandb, 
-        max_prompt_len=None, 
-        token_method=None, 
-        unlearn_num_examples=None, 
+        self,
+        score_threshold,
+        skip_tokens,
+        stop_tokens,
+        max_tokens,
+        lr,
+        loss_break,
+        norm_constraint,
+        num_grad_steps,
+        seed,
+        perplexity,
+        save_model,
+        log_wandb,
+        max_prompt_len=None,
+        token_method=None,
+        unlearn_num_examples=None,
         layers=None
     ):
         """
@@ -97,22 +97,22 @@ class FTConfig:
 
 class MemitConfig:
     def __init__(
-        self, 
-        score_threshold, 
-        skip_tokens, 
-        stop_tokens, 
-        max_tokens, 
-        v_lr, 
-        loss_break, 
-        loss_pred_prob_coef, 
-        v_num_grad_steps, 
-        seed, 
-        perplexity, 
-        save_model, 
-        log_wandb, 
-        max_prompt_len=None, 
-        token_method=None, 
-        unlearn_num_examples=None, 
+        self,
+        score_threshold,
+        skip_tokens,
+        stop_tokens,
+        max_tokens,
+        v_lr,
+        loss_break,
+        loss_pred_prob_coef,
+        v_num_grad_steps,
+        seed,
+        perplexity,
+        save_model,
+        log_wandb,
+        max_prompt_len=None,
+        token_method=None,
+        unlearn_num_examples=None,
         layers=None
     ):
         """
@@ -250,7 +250,7 @@ def edit_model(
     nethook.set_requires_grad(True, model)
 
     RewritingParamsClass, apply_method, hparams_prefix, hparams_suffix = load_alg(alg_name.upper())
-    params_dir = 'MEMIT/hprarams'
+    params_dir = 'baselines.MEMIT/hprarams'
 
     if model.config.model_type == 'gptj':
         model_name = 'EleutherAI_gpt-j-6B'
@@ -266,7 +266,7 @@ def edit_model(
         loss_pred_prob_coef = kwargs.get('loss_pred_prob_coef', 1)
         v_num_grad_steps = kwargs.get('v_num_grad_steps', 25)
         layers = kwargs.get('layers', [3,4,5,6,7,8]) # default as in memit paper
-        hparams = RewritingParamsClass.from_json(params_dir + '/MEMIT/' + model_name + '.json')
+        hparams = RewritingParamsClass.from_json(params_dir + '/baselines.MEMIT/' + model_name + '.json')
         hparams.v_lr = v_lr
         hparams.loss_break = loss_break
         hparams.loss_pred_prob_coef = loss_pred_prob_coef
@@ -329,13 +329,13 @@ def load_alg(alg_name):
         "MEND-CF",
         "MEND-zsRE",
         "ROME",
-        "MEMIT",
+        "baselines.MEMIT",
     ]
 
     if alg_name == "ROME":
         return ROMEHyperParams, apply_rome_to_model, "ROME", ""
-    elif alg_name == "MEMIT":
-        return MEMITHyperParams, apply_memit_to_model, "MEMIT", ""
+    elif alg_name == "baselines.MEMIT":
+        return baselines.MEMITHyperParams, apply_memit_to_model, "baselines.MEMIT", ""
     elif "FT" in alg_name:
         d = {
             "FT": (FTHyperParams, apply_ft_to_model, "FT", "_unconstr"),

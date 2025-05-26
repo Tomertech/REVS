@@ -1,38 +1,111 @@
-# REVS: Unlearning Sensitive Information in LLMs
+# REVS: Unlearning Sensitive Information in Language Models via Rank Editing in the Vocabulary Space
 
-Welcome to the REVS (Rank Editing in the Vocabulary Space) repository. REVS introduces a novel technique aimed at unlearning sensitive information from Large Language Models (LLMs) while minimally degrading their overall utility. This method, detailed in our [REVS Paper](https://technion-cs-nlp.github.io/REVS/), is at the forefront of ensuring privacy and security in the deployment of LLMs. Currently, we support EleutherAI's GPT-J 6B and Llama 3 8B models.
+[![ACL 2025](https://img.shields.io/badge/ACL-2025-blue)](https://technion-cs-nlp.github.io/REVS/)
+[![Paper](https://img.shields.io/badge/Paper-PDF-red)](https://arxiv.org/pdf/2406.09325v3)
 
-Contributions, feedback, and discussions are highly encouraged. Should you face any challenges or wish to propose enhancements, please do not hesitate to open an issue.
+Welcome to the official repository for REVS, a groundbreaking method for surgically removing sensitive information from Large Language Models while preserving their capabilities and defending against extraction attacks.
 
-![REVS Main Method](https://technion-cs-nlp.github.io/REVS/static/images/Main%20Method%20Plot%20Wide%20tinypng.png "REVS Main Method Overview")
+**🚨 The Problem**: Language models memorize and leak sensitive information (emails, SSNs, URLs) from their training data, creating serious privacy and compliance risks.
 
-*Editing one neuron with REVS:* (1) The neuron is projected from hidden space to vocabulary logit space. (2) The logit is adjusted to demote the target token rank to a desired lower rank R. (3) The adjusted logits vector is projected back to hidden space, yielding the updated neuron value.
-
-
-## Table of Contents
-1. [Installation](#installation)
-2. [Applying REVS](#applying-revs)
-4. [Citation](#citation)
+**✅ Our Solution**: REVS identifies and modifies specific neurons that promote sensitive tokens, demoting them in the vocabulary space without breaking the model's general knowledge.
 
 
-## Installation
+## REVS Main Method
 
-To set up your environment for using REVS, we recommend using `conda` to manage Python and CUDA dependencies. We have prepared a script, `setup_conda_env.sh`, which utilizes a YAML file, `revsenv.yml`, to create a new conda environment specifically tailored for REVS. This ensures that all necessary dependencies are correctly installed and configured. Execute the following command to prepare your environment:
+(1) Project neuron to vocabulary space →
+(2) Demote sensitive token rank →
+(3) Project back to update neuron
+
+## 🎯 Key Features
+
+- **🛡️ Robust Against Attacks**: First unlearning method that resists extraction attacks (Logit-Lens, Delta, Perturbation)
+- **🎪 Surgical Precision**: Targets specific neurons without degrading general capabilities
+- **📊 Real-World Tested**: Evaluated on naturally memorized emails, URLs, and synthetic SSNs
+- **⚡ Efficient**: Non-gradient-based approach that's faster than retraining
+
+## 📈 Performance Highlights
+
+| Dataset | REVS Unlearning Score | Best Baseline
+|---------|----------------------|---------------
+| SSN (Synthetic) | **89.58%** | 36.98%
+| Emails (Natural) | **62.37%** | 50.30%
+| URLs (Natural) | **44.25%** | 28.03%
+
+*Results on Llama-3-8B. REVS consistently outperforms all baselines while maintaining model integrity.*
+
+## 🚀 Quick Start
+
+### Installation
+
+Set up your environment using our provided conda configuration:
+
 ```bash
+# Clone the repository
+git clone https://github.com/technion-cs-nlp/REVS.git
+cd REVS
+
+# Create conda environment with all dependencies
 ./setup_conda_env.sh
+
+# Activate the environment
+conda activate revsenv
 ```
-This script will create a new conda environment named according to the specifications in `revsenv.yml`. Please ensure that you have Conda installed on your system before running the script.
 
-## Applying REVS
-The demo notebook, `notebooks/revs_demo.ipynb`, showcases the unlearning of several organically non-private memorized email addresses through REVS. It evaluates the effectiveness of the unlearning process as well as its robustness against extraction attacks.
+## 📚 Demo
 
-Additionally, the code for running the complete suite of experiments, including the baselines of MEMIT and FTL, can be found in the `experiments` directory.
+Explore our interactive Jupyter notebook:
 
-## How to Cite
+```bash
+jupyter notebook notebooks/revs_demo.ipynb
+```
+
+This demo showcases unlearning sample of naturally memorized email addresses
+
+### Supported Models
+
+- **Llama-3-8B** (meta-llama/Llama-3-8b)
+- **GPT-J-6B** (EleutherAI/gpt-j-6b)
+
+*Support for additional models coming soon!*
+
+## 📊 Datasets
+
+We provide three carefully curated datasets:
+
+1. **📧 Emails**: 205 real email addresses naturally memorized by Llama-3-8B
+2. **🔗 URLs**: 203 real URLs naturally memorized by GPT-J-6B
+3. **🆔 SSNs**: 200 synthetic social security numbers for controlled testing
+
+*Note: All sensitive data has been anonymized for research purposes.*
+
+## 🔬 Method Overview
+
+REVS operates through three key phases:
+
+### 1. 🎯 Localization
+- **Layer Selection**: Identify layers where target tokens rank highly
+- **Neuron Selection**: Find neurons with high activation + strong token association
+
+### 2. ✂️ Editing
+- **Vocabulary Projection**: Project neurons to vocabulary logit space
+- **Rank Demotion**: Iteratively reduce target token ranks
+- **Back Projection**: Update neuron values in hidden space
+
+### 3. 🛡️ Verification
+- **Effectiveness**: Measure unlearning success with capped rank scores
+- **Integrity**: Ensure general capabilities remain intact (MMLU, GSM8K)
+- **Robustness**: Test against extraction attacks
+
+## 📖 Paper Citation
+
+If you use REVS in your research, please cite:
+
 ```bibtex
-@article{ashuach2024revs,
-  title={REVS: Rank Editing in the Vocabulary Space for Unlearning Sensitive Information in Large Language Models},
+@inproceedings{ashuach2025revs,
+  title={REVS: Unlearning Sensitive Information in Language Models via Rank Editing in the Vocabulary Space},
   author={Ashuach, Tomer and Tutek, Martin and Belinkov, Yonatan},
-  year={2024}
+  booktitle={Findings of the Association for Computational Linguistics: ACL 2025},
+  year={2025},
+  publisher={Association for Computational Linguistics}
 }
 ```

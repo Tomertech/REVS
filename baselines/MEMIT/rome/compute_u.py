@@ -5,8 +5,8 @@ from typing import Dict, List
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.rome import repr_tools
-from MEMIT.util.globals import *
+from baselines.MEMIT.rome import repr_tools
+from baselines.MEMIT.util.globals import *
 
 from .layer_stats import layer_stats
 from .rome_hparams import ROMEHyperParams

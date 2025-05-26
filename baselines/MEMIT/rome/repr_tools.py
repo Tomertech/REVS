@@ -9,7 +9,7 @@ from typing import List
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.util import nethook
+from baselines.MEMIT.util import nethook
 
 
 def get_reprs_at_word_tokens(
@@ -112,7 +112,7 @@ def get_reprs_at_idxs(
 
     def _process(cur_repr, batch_idxs, key):
         nonlocal to_return
-        if len(cur_repr)==0: 
+        if len(cur_repr)==0:
             return
         cur_repr = cur_repr[0] if type(cur_repr) is tuple else cur_repr
 

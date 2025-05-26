@@ -6,9 +6,9 @@ from datasets import load_dataset
 from tqdm.auto import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.util.globals import *
-from MEMIT.util.nethook import Trace, set_requires_grad
-from MEMIT.util.runningstats import CombinedStat, Mean, NormMean, SecondMoment, tally
+from baselines.MEMIT.util.globals import *
+from baselines.MEMIT.util.nethook import Trace, set_requires_grad
+from baselines.MEMIT.util.runningstats import CombinedStat, Mean, NormMean, SecondMoment, tally
 
 from .tok_dataset import (
     TokenizedDataset,

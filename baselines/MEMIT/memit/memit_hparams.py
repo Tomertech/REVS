@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Literal
 
-from MEMIT.util.hparams import HyperParams
+from baselines.MEMIT.util.hparams import HyperParams
 
 
 @dataclass

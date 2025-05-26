@@ -1,5 +1,5 @@
 import argparse
-from utils.experiment import revs_multi_ssn_exp
+from utils.experiment_old import revs_multi_ssn_exp
 from revs.revs import REVSConfig
 
 

@@ -1,6 +1,6 @@
 import argparse
 from utils.model import FTConfig
-from utils.experiment import ft_llama_multi_email_exp
+from utils.experiment_old import ft_llama_multi_email_exp
 
 
 if __name__ == "__main__":
@@ -38,10 +38,10 @@ if __name__ == "__main__":
         log_wandb=args.log_wandb
     )
     ft_llama_multi_email_exp(
-        config=config, 
-        seeds=args.seeds, 
-        score_thresholds=args.score_thresholds, 
-        lrs=args.lrs, 
-        loss_breaks=args.loss_breaks, 
+        config=config,
+        seeds=args.seeds,
+        score_thresholds=args.score_thresholds,
+        lrs=args.lrs,
+        loss_breaks=args.loss_breaks,
         norm_constraints=args.norm_constraints,
     )

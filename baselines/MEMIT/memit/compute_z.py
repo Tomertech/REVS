@@ -4,8 +4,8 @@ import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.rome import repr_tools
-from MEMIT.util import nethook
+from baselines.MEMIT.rome import repr_tools
+from baselines.MEMIT.util import nethook
 
 from .memit_hparams import MEMITHyperParams
 
@@ -17,7 +17,7 @@ def compute_z(
     hparams: MEMITHyperParams,
     layer: int,
     context_templates: List[str],
-    mode: str = "delete", 
+    mode: str = "delete",
 ) -> Tuple[torch.Tensor, torch.Tensor]:
     """
     Computes the value (right) vector for the rank-1 update.

@@ -4,7 +4,7 @@ from typing import List, Optional
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from MEMIT.util.logit_lens import LogitLens
+from baselines.MEMIT.util.logit_lens import LogitLens
 
 
 def generate_interactive(
